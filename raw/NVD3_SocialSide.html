@@ -1,0 +1,2705 @@
+<!DOCTYPE html> 
+<meta charset="utf-8">
+<head>
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.2/nv.d3.css" rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.2/nv.d3.js"></script>
+</head>
+
+<body>
+<p>This page explores the rendering of a horizontal bar chart in NVD3, based on survey response data from the Pew Research Center’s Internet & American Life Project, “The Social Side of the Internet”. Permission to use the survey data was granted by the Pew Research Center’s Internet Project December 2013. <p>
+<p>The charts were created in R using rCharts, survey, and shiny packages, and summarize the types of social groups in which female and male respondents reported being active. </p>
+
+<p><strong>Getting nv.d3.js to run in WordPress</strong></p>
+<p>The usual solutions to running javascript in WordPress pages (<a href="https://codex.wordpress.org/Using_Javascript" target="_blank">template files</a> , <a href="https://wordpress.org/plugins/wp-d3/" target="_blank">WP-D3</a>, and <a href="https://wordpress.org/plugins/raw-html/" target="_blank">Raw HTML </a>) do not currently work for nv.d3.js. I've found a <a href="http://q-and-a.center/google-charts-in-wordpress/" target="_blank">solution initially created for inserting Google Charts into Wordpress </a> that successfully renders the chart I want. As a result, with the exception of the <code>div</code> tag in the rChart template, all of the javascript used to create the chart has been inserted into the header of this page using the <a href="https://wordpress.org/plugins/per-page-add-to/" target="_blank">Per page add to head </a> plugin.</p> 
+
+<p><strong>Two modifications to the rCharts output template </strong></p>
+<p>1. Replace the jquery function <code>$(document).ready(function() { </code> with <code>jQuery(document).ready(function($) {</code> </p>
+
+<p>2. My output (insert version of rCharts) came with .tooltip option. Tooltips were refactored in nvd3 version 1.8.1, so I customized the tooltips by inserting the chart.tooltip.contentGenerator function right before the d3-selection call. Here's the <a href="https://jsfiddle.net/amnakamura/9gLxs73o/" target="_blank">fiddle</a>. </p>
+
+<p><strong>Social Group Activity among Male Respondents</strong></p>
+<p>Tip: Click on <font color="e56717">DNK and Ref </font>before stacking </font></p>
+
+<div id='GrpM' class='rChart nvd3'   style="width:800px; height:400px;"></div>  
+
+<p><strong>Social Group Activity among Female Respondents</strong></p>
+<p>Tip: Click on <font color="e56717">DNK and Ref </font>before stacking </font></p>
+
+<div id='chart17f034905da1' class='rChart nvd3'   style="width:800px; height:400px;"></div>  
+
+<script type='text/javascript'>
+jQuery(document).ready(function($) {
+      drawchart75b8d6f6238()
+    });
+    function drawchart75b8d6f6238(){  
+var opts = {
+ "dom": "GrpM",
+"width":    800,
+"height":    400,
+"x": "grpType",
+"y": "MaleP",
+"group": "ansT",
+"type": "multiBarHorizontalChart",
+"id": "GrpM" 
+},
+        data = [
+ {
+ "MaleP":          18.01,
+"MaleSE":           1.26,
+"MaleT":            744,
+"ansT": "Active",
+"grpType": "Community" 
+},
+{
+ "MaleP":          81.88,
+"MaleSE":           1.26,
+"MaleT":           3383,
+"ansT": "Not Active",
+"grpType": "Community" 
+},
+{
+ "MaleP":           0.11,
+"MaleSE":           0.08,
+"MaleT":              5,
+"ansT": "DNK",
+"grpType": "Community" 
+},
+{
+ "MaleP":          37.09,
+"MaleSE":           1.65,
+"MaleT":           1532,
+"ansT": "Active",
+"grpType": "Religious/spiritual" 
+},
+{
+ "MaleP":          62.85,
+"MaleSE":           1.65,
+"MaleT":           2597,
+"ansT": "Not Active",
+"grpType": "Religious/spiritual" 
+},
+{
+ "MaleP":           0.06,
+"MaleSE":           0.06,
+"MaleT":              2,
+"ansT": "DNK",
+"grpType": "Religious/spiritual" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "Ref",
+"grpType": "Religious/spiritual" 
+},
+{
+ "MaleP":          26.55,
+"MaleSE":            1.5,
+"MaleT":           1097,
+"ansT": "Active",
+"grpType": "Sports/recreation" 
+},
+{
+ "MaleP":          73.22,
+"MaleSE":           1.51,
+"MaleT":           3025,
+"ansT": "Not Active",
+"grpType": "Sports/recreation" 
+},
+{
+ "MaleP":           0.23,
+"MaleSE":           0.23,
+"MaleT":              9,
+"ansT": "DNK",
+"grpType": "Sports/recreation" 
+},
+{
+ "MaleP":          18.57,
+"MaleSE":           1.29,
+"MaleT":            767,
+"ansT": "Active",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "MaleP":          81.22,
+"MaleSE":            1.3,
+"MaleT":           3356,
+"ansT": "Not Active",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "MaleP":           0.21,
+"MaleSE":           0.15,
+"MaleT":              9,
+"ansT": "Ref",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "MaleP":            8.9,
+"MaleSE":           0.92,
+"MaleT":            368,
+"ansT": "Active",
+"grpType": "Performance or arts" 
+},
+{
+ "MaleP":          90.96,
+"MaleSE":           0.93,
+"MaleT":           3758,
+"ansT": "Not Active",
+"grpType": "Performance or arts" 
+},
+{
+ "MaleP":           0.14,
+"MaleSE":           0.14,
+"MaleT":              6,
+"ansT": "DNK",
+"grpType": "Performance or arts" 
+},
+{
+ "MaleP":          20.63,
+"MaleSE":           1.33,
+"MaleT":            852,
+"ansT": "Active",
+"grpType": "Professional/trade" 
+},
+{
+ "MaleP":          79.04,
+"MaleSE":           1.34,
+"MaleT":           3266,
+"ansT": "Not Active",
+"grpType": "Professional/trade" 
+},
+{
+ "MaleP":           0.23,
+"MaleSE":           0.16,
+"MaleT":             10,
+"ansT": "DNK",
+"grpType": "Professional/trade" 
+},
+{
+ "MaleP":            0.1,
+"MaleSE":           0.07,
+"MaleT":              4,
+"ansT": "Ref",
+"grpType": "Professional/trade" 
+},
+{
+ "MaleP":           8.81,
+"MaleSE":           0.91,
+"MaleT":            364,
+"ansT": "Active",
+"grpType": "Parent" 
+},
+{
+ "MaleP":          91.19,
+"MaleSE":           0.91,
+"MaleT":           3768,
+"ansT": "Not Active",
+"grpType": "Parent" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "DNK",
+"grpType": "Parent" 
+},
+{
+ "MaleP":           8.56,
+"MaleSE":           0.91,
+"MaleT":            353,
+"ansT": "Active",
+"grpType": "Youth" 
+},
+{
+ "MaleP":          91.44,
+"MaleSE":           0.91,
+"MaleT":           3778,
+"ansT": "Not Active",
+"grpType": "Youth" 
+},
+{
+ "MaleP":           9.09,
+"MaleSE":           0.93,
+"MaleT":            376,
+"ansT": "Active",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "MaleP":          90.53,
+"MaleSE":           0.95,
+"MaleT":           3740,
+"ansT": "Not Active",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "MaleP":            0.2,
+"MaleSE":           0.16,
+"MaleT":              8,
+"ansT": "DNK",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "MaleP":           0.19,
+"MaleSE":           0.14,
+"MaleT":              8,
+"ansT": "Ref",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "MaleP":           9.43,
+"MaleSE":           0.93,
+"MaleT":            390,
+"ansT": "Active",
+"grpType": "Veterans" 
+},
+{
+ "MaleP":          90.57,
+"MaleSE":           0.93,
+"MaleT":           3742,
+"ansT": "Not Active",
+"grpType": "Veterans" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "DNK",
+"grpType": "Veterans" 
+},
+{
+ "MaleP":          20.75,
+"MaleSE":           1.33,
+"MaleT":            857,
+"ansT": "Active",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "MaleP":          78.87,
+"MaleSE":           1.34,
+"MaleT":           3259,
+"ansT": "Not Active",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "MaleP":           0.27,
+"MaleSE":           0.19,
+"MaleT":             11,
+"ansT": "DNK",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "MaleP":           0.11,
+"MaleSE":           0.11,
+"MaleT":              4,
+"ansT": "Ref",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "MaleP":           21.5,
+"MaleSE":           1.35,
+"MaleT":            888,
+"ansT": "Active",
+"grpType": "Consumer groups" 
+},
+{
+ "MaleP":          78.27,
+"MaleSE":           1.35,
+"MaleT":           3234,
+"ansT": "Not Active",
+"grpType": "Consumer groups" 
+},
+{
+ "MaleP":           0.24,
+"MaleSE":           0.15,
+"MaleT":             10,
+"ansT": "DNK",
+"grpType": "Consumer groups" 
+},
+{
+ "MaleP":           4.99,
+"MaleSE":           0.69,
+"MaleT":            206,
+"ansT": "Active",
+"grpType": "Farm organizations" 
+},
+{
+ "MaleP":          94.73,
+"MaleSE":           0.71,
+"MaleT":           3914,
+"ansT": "Not Active",
+"grpType": "Farm organizations" 
+},
+{
+ "MaleP":            0.2,
+"MaleSE":           0.14,
+"MaleT":              8,
+"ansT": "DNK",
+"grpType": "Farm organizations" 
+},
+{
+ "MaleP":           0.09,
+"MaleSE":           0.09,
+"MaleT":              4,
+"ansT": "Ref",
+"grpType": "Farm organizations" 
+},
+{
+ "MaleP":          18.01,
+"MaleSE":           1.26,
+"MaleT":            744,
+"ansT": "Active",
+"grpType": "Community" 
+},
+{
+ "MaleP":          81.88,
+"MaleSE":           1.26,
+"MaleT":           3383,
+"ansT": "Not Active",
+"grpType": "Community" 
+},
+{
+ "MaleP":           0.11,
+"MaleSE":           0.08,
+"MaleT":              5,
+"ansT": "DNK",
+"grpType": "Community" 
+},
+{
+ "MaleP":          37.09,
+"MaleSE":           1.65,
+"MaleT":           1532,
+"ansT": "Active",
+"grpType": "Religious/spiritual" 
+},
+{
+ "MaleP":          62.85,
+"MaleSE":           1.65,
+"MaleT":           2597,
+"ansT": "Not Active",
+"grpType": "Religious/spiritual" 
+},
+{
+ "MaleP":           0.06,
+"MaleSE":           0.06,
+"MaleT":              2,
+"ansT": "DNK",
+"grpType": "Religious/spiritual" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "Ref",
+"grpType": "Religious/spiritual" 
+},
+{
+ "MaleP":          26.55,
+"MaleSE":            1.5,
+"MaleT":           1097,
+"ansT": "Active",
+"grpType": "Sports/recreation" 
+},
+{
+ "MaleP":          73.22,
+"MaleSE":           1.51,
+"MaleT":           3025,
+"ansT": "Not Active",
+"grpType": "Sports/recreation" 
+},
+{
+ "MaleP":           0.23,
+"MaleSE":           0.23,
+"MaleT":              9,
+"ansT": "DNK",
+"grpType": "Sports/recreation" 
+},
+{
+ "MaleP":          18.57,
+"MaleSE":           1.29,
+"MaleT":            767,
+"ansT": "Active",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "MaleP":          81.22,
+"MaleSE":            1.3,
+"MaleT":           3356,
+"ansT": "Not Active",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "MaleP":           0.21,
+"MaleSE":           0.15,
+"MaleT":              9,
+"ansT": "Ref",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "MaleP":            8.9,
+"MaleSE":           0.92,
+"MaleT":            368,
+"ansT": "Active",
+"grpType": "Performance or arts" 
+},
+{
+ "MaleP":          90.96,
+"MaleSE":           0.93,
+"MaleT":           3758,
+"ansT": "Not Active",
+"grpType": "Performance or arts" 
+},
+{
+ "MaleP":           0.14,
+"MaleSE":           0.14,
+"MaleT":              6,
+"ansT": "DNK",
+"grpType": "Performance or arts" 
+},
+{
+ "MaleP":          20.63,
+"MaleSE":           1.33,
+"MaleT":            852,
+"ansT": "Active",
+"grpType": "Professional/trade" 
+},
+{
+ "MaleP":          79.04,
+"MaleSE":           1.34,
+"MaleT":           3266,
+"ansT": "Not Active",
+"grpType": "Professional/trade" 
+},
+{
+ "MaleP":           0.23,
+"MaleSE":           0.16,
+"MaleT":             10,
+"ansT": "DNK",
+"grpType": "Professional/trade" 
+},
+{
+ "MaleP":            0.1,
+"MaleSE":           0.07,
+"MaleT":              4,
+"ansT": "Ref",
+"grpType": "Professional/trade" 
+},
+{
+ "MaleP":           8.81,
+"MaleSE":           0.91,
+"MaleT":            364,
+"ansT": "Active",
+"grpType": "Parent" 
+},
+{
+ "MaleP":          91.19,
+"MaleSE":           0.91,
+"MaleT":           3768,
+"ansT": "Not Active",
+"grpType": "Parent" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "DNK",
+"grpType": "Parent" 
+},
+{
+ "MaleP":           8.56,
+"MaleSE":           0.91,
+"MaleT":            353,
+"ansT": "Active",
+"grpType": "Youth" 
+},
+{
+ "MaleP":          91.44,
+"MaleSE":           0.91,
+"MaleT":           3778,
+"ansT": "Not Active",
+"grpType": "Youth" 
+},
+{
+ "MaleP":           9.09,
+"MaleSE":           0.93,
+"MaleT":            376,
+"ansT": "Active",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "MaleP":          90.53,
+"MaleSE":           0.95,
+"MaleT":           3740,
+"ansT": "Not Active",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "MaleP":            0.2,
+"MaleSE":           0.16,
+"MaleT":              8,
+"ansT": "DNK",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "MaleP":           0.19,
+"MaleSE":           0.14,
+"MaleT":              8,
+"ansT": "Ref",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "MaleP":           9.43,
+"MaleSE":           0.93,
+"MaleT":            390,
+"ansT": "Active",
+"grpType": "Veterans" 
+},
+{
+ "MaleP":          90.57,
+"MaleSE":           0.93,
+"MaleT":           3742,
+"ansT": "Not Active",
+"grpType": "Veterans" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "DNK",
+"grpType": "Veterans" 
+},
+{
+ "MaleP":          20.75,
+"MaleSE":           1.33,
+"MaleT":            857,
+"ansT": "Active",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "MaleP":          78.87,
+"MaleSE":           1.34,
+"MaleT":           3259,
+"ansT": "Not Active",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "MaleP":           0.27,
+"MaleSE":           0.19,
+"MaleT":             11,
+"ansT": "DNK",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "MaleP":           0.11,
+"MaleSE":           0.11,
+"MaleT":              4,
+"ansT": "Ref",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "MaleP":           21.5,
+"MaleSE":           1.35,
+"MaleT":            888,
+"ansT": "Active",
+"grpType": "Consumer groups" 
+},
+{
+ "MaleP":          78.27,
+"MaleSE":           1.35,
+"MaleT":           3234,
+"ansT": "Not Active",
+"grpType": "Consumer groups" 
+},
+{
+ "MaleP":           0.24,
+"MaleSE":           0.15,
+"MaleT":             10,
+"ansT": "DNK",
+"grpType": "Consumer groups" 
+},
+{
+ "MaleP":           4.99,
+"MaleSE":           0.69,
+"MaleT":            206,
+"ansT": "Active",
+"grpType": "Farm organizations" 
+},
+{
+ "MaleP":          94.73,
+"MaleSE":           0.71,
+"MaleT":           3914,
+"ansT": "Not Active",
+"grpType": "Farm organizations" 
+},
+{
+ "MaleP":            0.2,
+"MaleSE":           0.14,
+"MaleT":              8,
+"ansT": "DNK",
+"grpType": "Farm organizations" 
+},
+{
+ "MaleP":           0.09,
+"MaleSE":           0.09,
+"MaleT":              4,
+"ansT": "Ref",
+"grpType": "Farm organizations" 
+},
+{
+ "MaleP":            4.8,
+"MaleSE":           0.63,
+"MaleT":            198,
+"ansT": "Active",
+"grpType": "Travel" 
+},
+{
+ "MaleP":          94.81,
+"MaleSE":           0.66,
+"MaleT":           3917,
+"ansT": "Not Active",
+"grpType": "Travel" 
+},
+{
+ "MaleP":           0.39,
+"MaleSE":           0.22,
+"MaleT":             16,
+"ansT": "DNK",
+"grpType": "Travel" 
+},
+{
+ "MaleP":          11.76,
+"MaleSE":           1.13,
+"MaleT":            486,
+"ansT": "Active",
+"grpType": "Sports fantasy" 
+},
+{
+ "MaleP":          88.19,
+"MaleSE":           1.13,
+"MaleT":           3644,
+"ansT": "Not Active",
+"grpType": "Sports fantasy" 
+},
+{
+ "MaleP":           0.04,
+"MaleSE":           0.04,
+"MaleT":              2,
+"ansT": "DNK",
+"grpType": "Sports fantasy" 
+},
+{
+ "MaleP":           7.46,
+"MaleSE":           0.96,
+"MaleT":            308,
+"ansT": "Active",
+"grpType": "Gaming" 
+},
+{
+ "MaleP":          91.56,
+"MaleSE":           1.01,
+"MaleT":           3783,
+"ansT": "Not Active",
+"grpType": "Gaming" 
+},
+{
+ "MaleP":           0.99,
+"MaleSE":           0.37,
+"MaleT":             41,
+"ansT": "DNK",
+"grpType": "Gaming" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "Ref",
+"grpType": "Gaming" 
+},
+{
+ "MaleP":          12.93,
+"MaleSE":           0.99,
+"MaleT":            534,
+"ansT": "Active",
+"grpType": "AARP,older Adults" 
+},
+{
+ "MaleP":          86.21,
+"MaleSE":           1.05,
+"MaleT":           3562,
+"ansT": "Not Active",
+"grpType": "AARP,older Adults" 
+},
+{
+ "MaleP":           0.72,
+"MaleSE":           0.39,
+"MaleT":             30,
+"ansT": "DNK",
+"grpType": "AARP,older Adults" 
+},
+{
+ "MaleP":           0.14,
+"MaleSE":           0.14,
+"MaleT":              6,
+"ansT": "Ref",
+"grpType": "AARP,older Adults" 
+},
+{
+ "MaleP":          14.53,
+"MaleSE":           1.14,
+"MaleT":            600,
+"ansT": "Active",
+"grpType": "Political" 
+},
+{
+ "MaleP":          85.14,
+"MaleSE":           1.15,
+"MaleT":           3518,
+"ansT": "Not Active",
+"grpType": "Political" 
+},
+{
+ "MaleP":           0.07,
+"MaleSE":           0.07,
+"MaleT":              3,
+"ansT": "DNK",
+"grpType": "Political" 
+},
+{
+ "MaleP":           0.27,
+"MaleSE":           0.17,
+"MaleT":             11,
+"ansT": "Ref",
+"grpType": "Political" 
+},
+{
+ "MaleP":           4.83,
+"MaleSE":           0.72,
+"MaleT":            199,
+"ansT": "Active",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "MaleP":          94.95,
+"MaleSE":           0.73,
+"MaleT":           3923,
+"ansT": "Not Active",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "MaleP":            0.1,
+"MaleSE":           0.07,
+"MaleT":              4,
+"ansT": "DNK",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "MaleP":           0.12,
+"MaleSE":           0.12,
+"MaleT":              5,
+"ansT": "Ref",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "MaleP":           8.92,
+"MaleSE":           0.95,
+"MaleT":            368,
+"ansT": "Active",
+"grpType": "Labor union" 
+},
+{
+ "MaleP":          90.96,
+"MaleSE":           0.96,
+"MaleT":           3758,
+"ansT": "Not Active",
+"grpType": "Labor union" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "DNK",
+"grpType": "Labor union" 
+},
+{
+ "MaleP":           0.12,
+"MaleSE":           0.12,
+"MaleT":              5,
+"ansT": "Ref",
+"grpType": "Labor union" 
+},
+{
+ "MaleP":          15.79,
+"MaleSE":           1.27,
+"MaleT":            652,
+"ansT": "Active",
+"grpType": "Support group" 
+},
+{
+ "MaleP":          84.04,
+"MaleSE":           1.27,
+"MaleT":           3472,
+"ansT": "Not Active",
+"grpType": "Support group" 
+},
+{
+ "MaleP":           0.17,
+"MaleSE":           0.13,
+"MaleT":              7,
+"ansT": "DNK",
+"grpType": "Support group" 
+},
+{
+ "MaleP":           14.4,
+"MaleSE":           1.12,
+"MaleT":            595,
+"ansT": "Active",
+"grpType": "Alumni" 
+},
+{
+ "MaleP":          85.55,
+"MaleSE":           1.12,
+"MaleT":           3535,
+"ansT": "Not Active",
+"grpType": "Alumni" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "DNK",
+"grpType": "Alumni" 
+},
+{
+ "MaleP":           0.05,
+"MaleSE":           0.05,
+"MaleT":              2,
+"ansT": "Ref",
+"grpType": "Alumni" 
+},
+{
+ "MaleP":           4.86,
+"MaleSE":           0.76,
+"MaleT":            201,
+"ansT": "Active",
+"grpType": "Fan group-performer" 
+},
+{
+ "MaleP":          94.87,
+"MaleSE":           0.77,
+"MaleT":           3919,
+"ansT": "Not Active",
+"grpType": "Fan group-performer" 
+},
+{
+ "MaleP":           0.15,
+"MaleSE":           0.09,
+"MaleT":              6,
+"ansT": "DNK",
+"grpType": "Fan group-performer" 
+},
+{
+ "MaleP":           0.12,
+"MaleSE":           0.09,
+"MaleT":              5,
+"ansT": "Ref",
+"grpType": "Fan group-performer" 
+},
+{
+ "MaleP":           4.08,
+"MaleSE":           0.65,
+"MaleT":            169,
+"ansT": "Active",
+"grpType": "Fan group-brand" 
+},
+{
+ "MaleP":          95.65,
+"MaleSE":           0.67,
+"MaleT":           3952,
+"ansT": "Not Active",
+"grpType": "Fan group-brand" 
+},
+{
+ "MaleP":           0.22,
+"MaleSE":           0.13,
+"MaleT":              9,
+"ansT": "DNK",
+"grpType": "Fan group-brand" 
+},
+{
+ "MaleP":           0.05,
+"MaleSE":           0.05,
+"MaleT":              2,
+"ansT": "Ref",
+"grpType": "Fan group-brand" 
+},
+{
+ "MaleP":           6.56,
+"MaleSE":            0.8,
+"MaleT":            271,
+"ansT": "Active",
+"grpType": "Environmental" 
+},
+{
+ "MaleP":          93.23,
+"MaleSE":           0.81,
+"MaleT":           3852,
+"ansT": "Not Active",
+"grpType": "Environmental" 
+},
+{
+ "MaleP":           0.21,
+"MaleSE":           0.13,
+"MaleT":              9,
+"ansT": "DNK",
+"grpType": "Environmental" 
+},
+{
+ "MaleP":           3.29,
+"MaleSE":           0.57,
+"MaleT":            136,
+"ansT": "Active",
+"grpType": "Other" 
+},
+{
+ "MaleP":          96.03,
+"MaleSE":           0.62,
+"MaleT":           3967,
+"ansT": "Not Active",
+"grpType": "Other" 
+},
+{
+ "MaleP":            0.3,
+"MaleSE":           0.13,
+"MaleT":             12,
+"ansT": "DNK",
+"grpType": "Other" 
+},
+{
+ "MaleP":           0.39,
+"MaleSE":           0.21,
+"MaleT":             16,
+"ansT": "Ref",
+"grpType": "Other" 
+},
+{
+ "MaleP":            4.8,
+"MaleSE":           0.63,
+"MaleT":            198,
+"ansT": "Active",
+"grpType": "Travel" 
+},
+{
+ "MaleP":          94.81,
+"MaleSE":           0.66,
+"MaleT":           3917,
+"ansT": "Not Active",
+"grpType": "Travel" 
+},
+{
+ "MaleP":           0.39,
+"MaleSE":           0.22,
+"MaleT":             16,
+"ansT": "DNK",
+"grpType": "Travel" 
+},
+{
+ "MaleP":          11.76,
+"MaleSE":           1.13,
+"MaleT":            486,
+"ansT": "Active",
+"grpType": "Sports fantasy" 
+},
+{
+ "MaleP":          88.19,
+"MaleSE":           1.13,
+"MaleT":           3644,
+"ansT": "Not Active",
+"grpType": "Sports fantasy" 
+},
+{
+ "MaleP":           0.04,
+"MaleSE":           0.04,
+"MaleT":              2,
+"ansT": "DNK",
+"grpType": "Sports fantasy" 
+},
+{
+ "MaleP":           7.46,
+"MaleSE":           0.96,
+"MaleT":            308,
+"ansT": "Active",
+"grpType": "Gaming" 
+},
+{
+ "MaleP":          91.56,
+"MaleSE":           1.01,
+"MaleT":           3783,
+"ansT": "Not Active",
+"grpType": "Gaming" 
+},
+{
+ "MaleP":           0.99,
+"MaleSE":           0.37,
+"MaleT":             41,
+"ansT": "DNK",
+"grpType": "Gaming" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "Ref",
+"grpType": "Gaming" 
+},
+{
+ "MaleP":          12.93,
+"MaleSE":           0.99,
+"MaleT":            534,
+"ansT": "Active",
+"grpType": "AARP,older Adults" 
+},
+{
+ "MaleP":          86.21,
+"MaleSE":           1.05,
+"MaleT":           3562,
+"ansT": "Not Active",
+"grpType": "AARP,older Adults" 
+},
+{
+ "MaleP":           0.72,
+"MaleSE":           0.39,
+"MaleT":             30,
+"ansT": "DNK",
+"grpType": "AARP,older Adults" 
+},
+{
+ "MaleP":           0.14,
+"MaleSE":           0.14,
+"MaleT":              6,
+"ansT": "Ref",
+"grpType": "AARP,older Adults" 
+},
+{
+ "MaleP":          14.53,
+"MaleSE":           1.14,
+"MaleT":            600,
+"ansT": "Active",
+"grpType": "Political" 
+},
+{
+ "MaleP":          85.14,
+"MaleSE":           1.15,
+"MaleT":           3518,
+"ansT": "Not Active",
+"grpType": "Political" 
+},
+{
+ "MaleP":           0.07,
+"MaleSE":           0.07,
+"MaleT":              3,
+"ansT": "DNK",
+"grpType": "Political" 
+},
+{
+ "MaleP":           0.27,
+"MaleSE":           0.17,
+"MaleT":             11,
+"ansT": "Ref",
+"grpType": "Political" 
+},
+{
+ "MaleP":           4.83,
+"MaleSE":           0.72,
+"MaleT":            199,
+"ansT": "Active",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "MaleP":          94.95,
+"MaleSE":           0.73,
+"MaleT":           3923,
+"ansT": "Not Active",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "MaleP":            0.1,
+"MaleSE":           0.07,
+"MaleT":              4,
+"ansT": "DNK",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "MaleP":           0.12,
+"MaleSE":           0.12,
+"MaleT":              5,
+"ansT": "Ref",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "MaleP":           8.92,
+"MaleSE":           0.95,
+"MaleT":            368,
+"ansT": "Active",
+"grpType": "Labor union" 
+},
+{
+ "MaleP":          90.96,
+"MaleSE":           0.96,
+"MaleT":           3758,
+"ansT": "Not Active",
+"grpType": "Labor union" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "DNK",
+"grpType": "Labor union" 
+},
+{
+ "MaleP":           0.12,
+"MaleSE":           0.12,
+"MaleT":              5,
+"ansT": "Ref",
+"grpType": "Labor union" 
+},
+{
+ "MaleP":          15.79,
+"MaleSE":           1.27,
+"MaleT":            652,
+"ansT": "Active",
+"grpType": "Support group" 
+},
+{
+ "MaleP":          84.04,
+"MaleSE":           1.27,
+"MaleT":           3472,
+"ansT": "Not Active",
+"grpType": "Support group" 
+},
+{
+ "MaleP":           0.17,
+"MaleSE":           0.13,
+"MaleT":              7,
+"ansT": "DNK",
+"grpType": "Support group" 
+},
+{
+ "MaleP":           14.4,
+"MaleSE":           1.12,
+"MaleT":            595,
+"ansT": "Active",
+"grpType": "Alumni" 
+},
+{
+ "MaleP":          85.55,
+"MaleSE":           1.12,
+"MaleT":           3535,
+"ansT": "Not Active",
+"grpType": "Alumni" 
+},
+{
+ "MaleP":              0,
+"MaleSE":              0,
+"MaleT":              0,
+"ansT": "DNK",
+"grpType": "Alumni" 
+},
+{
+ "MaleP":           0.05,
+"MaleSE":           0.05,
+"MaleT":              2,
+"ansT": "Ref",
+"grpType": "Alumni" 
+},
+{
+ "MaleP":           4.86,
+"MaleSE":           0.76,
+"MaleT":            201,
+"ansT": "Active",
+"grpType": "Fan group-performer" 
+},
+{
+ "MaleP":          94.87,
+"MaleSE":           0.77,
+"MaleT":           3919,
+"ansT": "Not Active",
+"grpType": "Fan group-performer" 
+},
+{
+ "MaleP":           0.15,
+"MaleSE":           0.09,
+"MaleT":              6,
+"ansT": "DNK",
+"grpType": "Fan group-performer" 
+},
+{
+ "MaleP":           0.12,
+"MaleSE":           0.09,
+"MaleT":              5,
+"ansT": "Ref",
+"grpType": "Fan group-performer" 
+},
+{
+ "MaleP":           4.08,
+"MaleSE":           0.65,
+"MaleT":            169,
+"ansT": "Active",
+"grpType": "Fan group-brand" 
+},
+{
+ "MaleP":          95.65,
+"MaleSE":           0.67,
+"MaleT":           3952,
+"ansT": "Not Active",
+"grpType": "Fan group-brand" 
+},
+{
+ "MaleP":           0.22,
+"MaleSE":           0.13,
+"MaleT":              9,
+"ansT": "DNK",
+"grpType": "Fan group-brand" 
+},
+{
+ "MaleP":           0.05,
+"MaleSE":           0.05,
+"MaleT":              2,
+"ansT": "Ref",
+"grpType": "Fan group-brand" 
+},
+{
+ "MaleP":           6.56,
+"MaleSE":            0.8,
+"MaleT":            271,
+"ansT": "Active",
+"grpType": "Environmental" 
+},
+{
+ "MaleP":          93.23,
+"MaleSE":           0.81,
+"MaleT":           3852,
+"ansT": "Not Active",
+"grpType": "Environmental" 
+},
+{
+ "MaleP":           0.21,
+"MaleSE":           0.13,
+"MaleT":              9,
+"ansT": "DNK",
+"grpType": "Environmental" 
+},
+{
+ "MaleP":           3.29,
+"MaleSE":           0.57,
+"MaleT":            136,
+"ansT": "Active",
+"grpType": "Other" 
+},
+{
+ "MaleP":          96.03,
+"MaleSE":           0.62,
+"MaleT":           3967,
+"ansT": "Not Active",
+"grpType": "Other" 
+},
+{
+ "MaleP":            0.3,
+"MaleSE":           0.13,
+"MaleT":             12,
+"ansT": "DNK",
+"grpType": "Other" 
+},
+{
+ "MaleP":           0.39,
+"MaleSE":           0.21,
+"MaleT":             16,
+"ansT": "Ref",
+"grpType": "Other" 
+} 
+]
+  
+      var data = d3.nest()
+        .key(function(d){
+          return opts.group === undefined ? d.y : d[opts.group]
+        })
+        .entries(data)
+      
+      nv.addGraph(function() {
+        var chart = nv.models[opts.type]()
+          .x(function(d) { return d[opts.x] })
+          .y(function(d) { return d[opts.y] })
+          .width(opts.width)
+          .height(opts.height)
+
+        chart
+  .margin({
+ "left":    200 
+})
+
+chart.tooltip.contentGenerator(function (obj) {
+var content = '<center>' + '<strong>' + obj.data.ansT + '</strong>' +
+    '<p>' + obj.data.grpType + '</p>' + 
+    '<p>' + obj.data.MaleP +'%'+ '</p>'  +
+    '<p>' + 's.e. ' + obj.data.MaleSE + '</p></center>';
+return content;
+});
+  
+       d3.select("#" + opts.id)
+        .append('svg')
+        .datum(data)
+        .transition().duration(500)
+        .call(chart);
+
+       nv.utils.windowResize(chart.update);
+       return chart;
+      });
+    };
+
+jQuery(document).ready(function($) {
+      drawchart17f034905da1()
+    });
+    function drawchart17f034905da1(){  
+      var fopts = {
+ "dom": "chart17f034905da1",
+"width":    800,
+"height":    400,
+"x": "grpType",
+"y": "FemaleP",
+"group": "ansT",
+"type": "multiBarHorizontalChart",
+"id": "chart17f034905da1" 
+},
+        fdata = [
+ {
+ "FemaleP":          19.93,
+"FemaleSE":           1.23,
+"FemaleT":            877,
+"ansT": "Active",
+"grpType": "Community" 
+},
+{
+ "FemaleP":          80.02,
+"FemaleSE":           1.23,
+"FemaleT":           3520,
+"ansT": "Not Active",
+"grpType": "Community" 
+},
+{
+ "FemaleP":           0.05,
+"FemaleSE":           0.05,
+"FemaleT":              2,
+"ansT": "DNK",
+"grpType": "Community" 
+},
+{
+ "FemaleP":          42.95,
+"FemaleSE":            1.6,
+"FemaleT":           1889,
+"ansT": "Active",
+"grpType": "Religious/spiritual" 
+},
+{
+ "FemaleP":          56.96,
+"FemaleSE":            1.6,
+"FemaleT":           2506,
+"ansT": "Not Active",
+"grpType": "Religious/spiritual" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "DNK",
+"grpType": "Religious/spiritual" 
+},
+{
+ "FemaleP":           0.09,
+"FemaleSE":           0.09,
+"FemaleT":              4,
+"ansT": "Ref",
+"grpType": "Religious/spiritual" 
+},
+{
+ "FemaleP":          21.68,
+"FemaleSE":           1.31,
+"FemaleT":            954,
+"ansT": "Active",
+"grpType": "Sports/recreation" 
+},
+{
+ "FemaleP":          78.11,
+"FemaleSE":           1.31,
+"FemaleT":           3436,
+"ansT": "Not Active",
+"grpType": "Sports/recreation" 
+},
+{
+ "FemaleP":           0.21,
+"FemaleSE":           0.13,
+"FemaleT":              9,
+"ansT": "DNK",
+"grpType": "Sports/recreation" 
+},
+{
+ "FemaleP":          15.46,
+"FemaleSE":           1.09,
+"FemaleT":            680,
+"ansT": "Active",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "FemaleP":          84.54,
+"FemaleSE":           1.09,
+"FemaleT":           3719,
+"ansT": "Not Active",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "FemaleP":          11.97,
+"FemaleSE":           0.99,
+"FemaleT":            526,
+"ansT": "Active",
+"grpType": "Performance or arts" 
+},
+{
+ "FemaleP":          87.87,
+"FemaleSE":              1,
+"FemaleT":           3865,
+"ansT": "Not Active",
+"grpType": "Performance or arts" 
+},
+{
+ "FemaleP":           0.16,
+"FemaleSE":           0.12,
+"FemaleT":              7,
+"ansT": "DNK",
+"grpType": "Performance or arts" 
+},
+{
+ "FemaleP":          19.48,
+"FemaleSE":           1.21,
+"FemaleT":            857,
+"ansT": "Active",
+"grpType": "Professional/trade" 
+},
+{
+ "FemaleP":          80.25,
+"FemaleSE":           1.22,
+"FemaleT":           3530,
+"ansT": "Not Active",
+"grpType": "Professional/trade" 
+},
+{
+ "FemaleP":           0.27,
+"FemaleSE":           0.14,
+"FemaleT":             12,
+"ansT": "DNK",
+"grpType": "Professional/trade" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Professional/trade" 
+},
+{
+ "FemaleP":          16.02,
+"FemaleSE":           1.16,
+"FemaleT":            705,
+"ansT": "Active",
+"grpType": "Parent" 
+},
+{
+ "FemaleP":          83.83,
+"FemaleSE":           1.16,
+"FemaleT":           3688,
+"ansT": "Not Active",
+"grpType": "Parent" 
+},
+{
+ "FemaleP":           0.15,
+"FemaleSE":           0.11,
+"FemaleT":              7,
+"ansT": "DNK",
+"grpType": "Parent" 
+},
+{
+ "FemaleP":           9.86,
+"FemaleSE":           0.95,
+"FemaleT":            434,
+"ansT": "Active",
+"grpType": "Youth" 
+},
+{
+ "FemaleP":          90.14,
+"FemaleSE":           0.95,
+"FemaleT":           3965,
+"ansT": "Not Active",
+"grpType": "Youth" 
+},
+{
+ "FemaleP":           7.11,
+"FemaleSE":           0.75,
+"FemaleT":            313,
+"ansT": "Active",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "FemaleP":          92.64,
+"FemaleSE":           0.77,
+"FemaleT":           4075,
+"ansT": "Not Active",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "FemaleP":           0.15,
+"FemaleSE":           0.13,
+"FemaleT":              7,
+"ansT": "DNK",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "FemaleP":            0.1,
+"FemaleSE":            0.1,
+"FemaleT":              4,
+"ansT": "Ref",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "FemaleP":           4.73,
+"FemaleSE":           0.61,
+"FemaleT":            208,
+"ansT": "Active",
+"grpType": "Veterans" 
+},
+{
+ "FemaleP":          95.22,
+"FemaleSE":           0.61,
+"FemaleT":           4189,
+"ansT": "Not Active",
+"grpType": "Veterans" 
+},
+{
+ "FemaleP":           0.05,
+"FemaleSE":           0.05,
+"FemaleT":              2,
+"ansT": "DNK",
+"grpType": "Veterans" 
+},
+{
+ "FemaleP":          23.66,
+"FemaleSE":           1.32,
+"FemaleT":           1041,
+"ansT": "Active",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "FemaleP":          76.26,
+"FemaleSE":           1.32,
+"FemaleT":           3355,
+"ansT": "Not Active",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "FemaleP":           0.08,
+"FemaleSE":           0.08,
+"FemaleT":              3,
+"ansT": "DNK",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "FemaleP":          25.82,
+"FemaleSE":           1.37,
+"FemaleT":           1136,
+"ansT": "Active",
+"grpType": "Consumer groups" 
+},
+{
+ "FemaleP":          73.49,
+"FemaleSE":            1.4,
+"FemaleT":           3233,
+"ansT": "Not Active",
+"grpType": "Consumer groups" 
+},
+{
+ "FemaleP":           0.69,
+"FemaleSE":           0.38,
+"FemaleT":             30,
+"ansT": "DNK",
+"grpType": "Consumer groups" 
+},
+{
+ "FemaleP":           3.62,
+"FemaleSE":            0.6,
+"FemaleT":            159,
+"ansT": "Active",
+"grpType": "Farm organizations" 
+},
+{
+ "FemaleP":          95.77,
+"FemaleSE":           0.69,
+"FemaleT":           4213,
+"ansT": "Not Active",
+"grpType": "Farm organizations" 
+},
+{
+ "FemaleP":            0.6,
+"FemaleSE":           0.34,
+"FemaleT":             27,
+"ansT": "DNK",
+"grpType": "Farm organizations" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Farm organizations" 
+},
+{
+ "FemaleP":          19.93,
+"FemaleSE":           1.23,
+"FemaleT":            877,
+"ansT": "Active",
+"grpType": "Community" 
+},
+{
+ "FemaleP":          80.02,
+"FemaleSE":           1.23,
+"FemaleT":           3520,
+"ansT": "Not Active",
+"grpType": "Community" 
+},
+{
+ "FemaleP":           0.05,
+"FemaleSE":           0.05,
+"FemaleT":              2,
+"ansT": "DNK",
+"grpType": "Community" 
+},
+{
+ "FemaleP":          42.95,
+"FemaleSE":            1.6,
+"FemaleT":           1889,
+"ansT": "Active",
+"grpType": "Religious/spiritual" 
+},
+{
+ "FemaleP":          56.96,
+"FemaleSE":            1.6,
+"FemaleT":           2506,
+"ansT": "Not Active",
+"grpType": "Religious/spiritual" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "DNK",
+"grpType": "Religious/spiritual" 
+},
+{
+ "FemaleP":           0.09,
+"FemaleSE":           0.09,
+"FemaleT":              4,
+"ansT": "Ref",
+"grpType": "Religious/spiritual" 
+},
+{
+ "FemaleP":          21.68,
+"FemaleSE":           1.31,
+"FemaleT":            954,
+"ansT": "Active",
+"grpType": "Sports/recreation" 
+},
+{
+ "FemaleP":          78.11,
+"FemaleSE":           1.31,
+"FemaleT":           3436,
+"ansT": "Not Active",
+"grpType": "Sports/recreation" 
+},
+{
+ "FemaleP":           0.21,
+"FemaleSE":           0.13,
+"FemaleT":              9,
+"ansT": "DNK",
+"grpType": "Sports/recreation" 
+},
+{
+ "FemaleP":          15.46,
+"FemaleSE":           1.09,
+"FemaleT":            680,
+"ansT": "Active",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "FemaleP":          84.54,
+"FemaleSE":           1.09,
+"FemaleT":           3719,
+"ansT": "Not Active",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Hobby groups/clubs" 
+},
+{
+ "FemaleP":          11.97,
+"FemaleSE":           0.99,
+"FemaleT":            526,
+"ansT": "Active",
+"grpType": "Performance or arts" 
+},
+{
+ "FemaleP":          87.87,
+"FemaleSE":              1,
+"FemaleT":           3865,
+"ansT": "Not Active",
+"grpType": "Performance or arts" 
+},
+{
+ "FemaleP":           0.16,
+"FemaleSE":           0.12,
+"FemaleT":              7,
+"ansT": "DNK",
+"grpType": "Performance or arts" 
+},
+{
+ "FemaleP":          19.48,
+"FemaleSE":           1.21,
+"FemaleT":            857,
+"ansT": "Active",
+"grpType": "Professional/trade" 
+},
+{
+ "FemaleP":          80.25,
+"FemaleSE":           1.22,
+"FemaleT":           3530,
+"ansT": "Not Active",
+"grpType": "Professional/trade" 
+},
+{
+ "FemaleP":           0.27,
+"FemaleSE":           0.14,
+"FemaleT":             12,
+"ansT": "DNK",
+"grpType": "Professional/trade" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Professional/trade" 
+},
+{
+ "FemaleP":          16.02,
+"FemaleSE":           1.16,
+"FemaleT":            705,
+"ansT": "Active",
+"grpType": "Parent" 
+},
+{
+ "FemaleP":          83.83,
+"FemaleSE":           1.16,
+"FemaleT":           3688,
+"ansT": "Not Active",
+"grpType": "Parent" 
+},
+{
+ "FemaleP":           0.15,
+"FemaleSE":           0.11,
+"FemaleT":              7,
+"ansT": "DNK",
+"grpType": "Parent" 
+},
+{
+ "FemaleP":           9.86,
+"FemaleSE":           0.95,
+"FemaleT":            434,
+"ansT": "Active",
+"grpType": "Youth" 
+},
+{
+ "FemaleP":          90.14,
+"FemaleSE":           0.95,
+"FemaleT":           3965,
+"ansT": "Not Active",
+"grpType": "Youth" 
+},
+{
+ "FemaleP":           7.11,
+"FemaleSE":           0.75,
+"FemaleT":            313,
+"ansT": "Active",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "FemaleP":          92.64,
+"FemaleSE":           0.77,
+"FemaleT":           4075,
+"ansT": "Not Active",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "FemaleP":           0.15,
+"FemaleSE":           0.13,
+"FemaleT":              7,
+"ansT": "DNK",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "FemaleP":            0.1,
+"FemaleSE":            0.1,
+"FemaleT":              4,
+"ansT": "Ref",
+"grpType": "Fraternity,Sorority" 
+},
+{
+ "FemaleP":           4.73,
+"FemaleSE":           0.61,
+"FemaleT":            208,
+"ansT": "Active",
+"grpType": "Veterans" 
+},
+{
+ "FemaleP":          95.22,
+"FemaleSE":           0.61,
+"FemaleT":           4189,
+"ansT": "Not Active",
+"grpType": "Veterans" 
+},
+{
+ "FemaleP":           0.05,
+"FemaleSE":           0.05,
+"FemaleT":              2,
+"ansT": "DNK",
+"grpType": "Veterans" 
+},
+{
+ "FemaleP":          23.66,
+"FemaleSE":           1.32,
+"FemaleT":           1041,
+"ansT": "Active",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "FemaleP":          76.26,
+"FemaleSE":           1.32,
+"FemaleT":           3355,
+"ansT": "Not Active",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "FemaleP":           0.08,
+"FemaleSE":           0.08,
+"FemaleT":              3,
+"ansT": "DNK",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Charitable/volunteer" 
+},
+{
+ "FemaleP":          25.82,
+"FemaleSE":           1.37,
+"FemaleT":           1136,
+"ansT": "Active",
+"grpType": "Consumer groups" 
+},
+{
+ "FemaleP":          73.49,
+"FemaleSE":            1.4,
+"FemaleT":           3233,
+"ansT": "Not Active",
+"grpType": "Consumer groups" 
+},
+{
+ "FemaleP":           0.69,
+"FemaleSE":           0.38,
+"FemaleT":             30,
+"ansT": "DNK",
+"grpType": "Consumer groups" 
+},
+{
+ "FemaleP":           3.62,
+"FemaleSE":            0.6,
+"FemaleT":            159,
+"ansT": "Active",
+"grpType": "Farm organizations" 
+},
+{
+ "FemaleP":          95.77,
+"FemaleSE":           0.69,
+"FemaleT":           4213,
+"ansT": "Not Active",
+"grpType": "Farm organizations" 
+},
+{
+ "FemaleP":            0.6,
+"FemaleSE":           0.34,
+"FemaleT":             27,
+"ansT": "DNK",
+"grpType": "Farm organizations" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Farm organizations" 
+},
+{
+ "FemaleP":           5.31,
+"FemaleSE":           0.66,
+"FemaleT":            233,
+"ansT": "Active",
+"grpType": "Travel" 
+},
+{
+ "FemaleP":           94.6,
+"FemaleSE":           0.67,
+"FemaleT":           4161,
+"ansT": "Not Active",
+"grpType": "Travel" 
+},
+{
+ "FemaleP":            0.1,
+"FemaleSE":            0.1,
+"FemaleT":              4,
+"ansT": "DNK",
+"grpType": "Travel" 
+},
+{
+ "FemaleP":           2.96,
+"FemaleSE":           0.51,
+"FemaleT":            130,
+"ansT": "Active",
+"grpType": "Sports fantasy" 
+},
+{
+ "FemaleP":          96.73,
+"FemaleSE":           0.53,
+"FemaleT":           4255,
+"ansT": "Not Active",
+"grpType": "Sports fantasy" 
+},
+{
+ "FemaleP":           0.31,
+"FemaleSE":           0.16,
+"FemaleT":             14,
+"ansT": "DNK",
+"grpType": "Sports fantasy" 
+},
+{
+ "FemaleP":           4.07,
+"FemaleSE":           0.66,
+"FemaleT":            179,
+"ansT": "Active",
+"grpType": "Gaming" 
+},
+{
+ "FemaleP":          94.87,
+"FemaleSE":           0.73,
+"FemaleT":           4173,
+"ansT": "Not Active",
+"grpType": "Gaming" 
+},
+{
+ "FemaleP":           0.98,
+"FemaleSE":           0.31,
+"FemaleT":             43,
+"ansT": "DNK",
+"grpType": "Gaming" 
+},
+{
+ "FemaleP":           0.09,
+"FemaleSE":           0.06,
+"FemaleT":              4,
+"ansT": "Ref",
+"grpType": "Gaming" 
+},
+{
+ "FemaleP":           17.1,
+"FemaleSE":           1.09,
+"FemaleT":            752,
+"ansT": "Active",
+"grpType": "AARP,older Adults" 
+},
+{
+ "FemaleP":           82.6,
+"FemaleSE":            1.1,
+"FemaleT":           3634,
+"ansT": "Not Active",
+"grpType": "AARP,older Adults" 
+},
+{
+ "FemaleP":           0.26,
+"FemaleSE":           0.16,
+"FemaleT":             11,
+"ansT": "DNK",
+"grpType": "AARP,older Adults" 
+},
+{
+ "FemaleP":           0.04,
+"FemaleSE":           0.04,
+"FemaleT":              2,
+"ansT": "Ref",
+"grpType": "AARP,older Adults" 
+},
+{
+ "FemaleP":          15.28,
+"FemaleSE":           1.07,
+"FemaleT":            672,
+"ansT": "Active",
+"grpType": "Political" 
+},
+{
+ "FemaleP":          84.48,
+"FemaleSE":           1.08,
+"FemaleT":           3716,
+"ansT": "Not Active",
+"grpType": "Political" 
+},
+{
+ "FemaleP":           0.18,
+"FemaleSE":           0.13,
+"FemaleT":              8,
+"ansT": "DNK",
+"grpType": "Political" 
+},
+{
+ "FemaleP":           0.06,
+"FemaleSE":           0.06,
+"FemaleT":              2,
+"ansT": "Ref",
+"grpType": "Political" 
+},
+{
+ "FemaleP":            5.9,
+"FemaleSE":            0.8,
+"FemaleT":            259,
+"ansT": "Active",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "FemaleP":          93.77,
+"FemaleSE":           0.82,
+"FemaleT":           4125,
+"ansT": "Not Active",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "FemaleP":           0.33,
+"FemaleSE":           0.19,
+"FemaleT":             15,
+"ansT": "DNK",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "FemaleP":           6.37,
+"FemaleSE":           0.74,
+"FemaleT":            280,
+"ansT": "Active",
+"grpType": "Labor union" 
+},
+{
+ "FemaleP":          93.47,
+"FemaleSE":           0.75,
+"FemaleT":           4112,
+"ansT": "Not Active",
+"grpType": "Labor union" 
+},
+{
+ "FemaleP":           0.16,
+"FemaleSE":           0.12,
+"FemaleT":              7,
+"ansT": "DNK",
+"grpType": "Labor union" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Labor union" 
+},
+{
+ "FemaleP":          20.79,
+"FemaleSE":           1.32,
+"FemaleT":            915,
+"ansT": "Active",
+"grpType": "Support group" 
+},
+{
+ "FemaleP":          79.12,
+"FemaleSE":           1.32,
+"FemaleT":           3480,
+"ansT": "Not Active",
+"grpType": "Support group" 
+},
+{
+ "FemaleP":            0.1,
+"FemaleSE":            0.1,
+"FemaleT":              4,
+"ansT": "DNK",
+"grpType": "Support group" 
+},
+{
+ "FemaleP":          14.32,
+"FemaleSE":           1.03,
+"FemaleT":            630,
+"ansT": "Active",
+"grpType": "Alumni" 
+},
+{
+ "FemaleP":          85.45,
+"FemaleSE":           1.03,
+"FemaleT":           3759,
+"ansT": "Not Active",
+"grpType": "Alumni" 
+},
+{
+ "FemaleP":           0.17,
+"FemaleSE":           0.12,
+"FemaleT":              8,
+"ansT": "DNK",
+"grpType": "Alumni" 
+},
+{
+ "FemaleP":           0.05,
+"FemaleSE":           0.05,
+"FemaleT":              2,
+"ansT": "Ref",
+"grpType": "Alumni" 
+},
+{
+ "FemaleP":           6.35,
+"FemaleSE":           0.82,
+"FemaleT":            279,
+"ansT": "Active",
+"grpType": "Fan group-performer" 
+},
+{
+ "FemaleP":          93.27,
+"FemaleSE":           0.86,
+"FemaleT":           4103,
+"ansT": "Not Active",
+"grpType": "Fan group-performer" 
+},
+{
+ "FemaleP":           0.38,
+"FemaleSE":           0.26,
+"FemaleT":             17,
+"ansT": "DNK",
+"grpType": "Fan group-performer" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Fan group-performer" 
+},
+{
+ "FemaleP":           2.65,
+"FemaleSE":            0.5,
+"FemaleT":            117,
+"ansT": "Active",
+"grpType": "Fan group-brand" 
+},
+{
+ "FemaleP":          97.11,
+"FemaleSE":           0.51,
+"FemaleT":           4272,
+"ansT": "Not Active",
+"grpType": "Fan group-brand" 
+},
+{
+ "FemaleP":           0.24,
+"FemaleSE":           0.14,
+"FemaleT":             11,
+"ansT": "DNK",
+"grpType": "Fan group-brand" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Fan group-brand" 
+},
+{
+ "FemaleP":           8.13,
+"FemaleSE":           0.81,
+"FemaleT":            358,
+"ansT": "Active",
+"grpType": "Environmental" 
+},
+{
+ "FemaleP":          91.43,
+"FemaleSE":           0.85,
+"FemaleT":           4022,
+"ansT": "Not Active",
+"grpType": "Environmental" 
+},
+{
+ "FemaleP":           0.44,
+"FemaleSE":           0.27,
+"FemaleT":             19,
+"ansT": "DNK",
+"grpType": "Environmental" 
+},
+{
+ "FemaleP":           3.37,
+"FemaleSE":            0.5,
+"FemaleT":            148,
+"ansT": "Active",
+"grpType": "Other" 
+},
+{
+ "FemaleP":          95.18,
+"FemaleSE":           0.61,
+"FemaleT":           4187,
+"ansT": "Not Active",
+"grpType": "Other" 
+},
+{
+ "FemaleP":           1.32,
+"FemaleSE":           0.35,
+"FemaleT":             58,
+"ansT": "DNK",
+"grpType": "Other" 
+},
+{
+ "FemaleP":           0.13,
+"FemaleSE":            0.1,
+"FemaleT":              6,
+"ansT": "Ref",
+"grpType": "Other" 
+},
+{
+ "FemaleP":           5.31,
+"FemaleSE":           0.66,
+"FemaleT":            233,
+"ansT": "Active",
+"grpType": "Travel" 
+},
+{
+ "FemaleP":           94.6,
+"FemaleSE":           0.67,
+"FemaleT":           4161,
+"ansT": "Not Active",
+"grpType": "Travel" 
+},
+{
+ "FemaleP":            0.1,
+"FemaleSE":            0.1,
+"FemaleT":              4,
+"ansT": "DNK",
+"grpType": "Travel" 
+},
+{
+ "FemaleP":           2.96,
+"FemaleSE":           0.51,
+"FemaleT":            130,
+"ansT": "Active",
+"grpType": "Sports fantasy" 
+},
+{
+ "FemaleP":          96.73,
+"FemaleSE":           0.53,
+"FemaleT":           4255,
+"ansT": "Not Active",
+"grpType": "Sports fantasy" 
+},
+{
+ "FemaleP":           0.31,
+"FemaleSE":           0.16,
+"FemaleT":             14,
+"ansT": "DNK",
+"grpType": "Sports fantasy" 
+},
+{
+ "FemaleP":           4.07,
+"FemaleSE":           0.66,
+"FemaleT":            179,
+"ansT": "Active",
+"grpType": "Gaming" 
+},
+{
+ "FemaleP":          94.87,
+"FemaleSE":           0.73,
+"FemaleT":           4173,
+"ansT": "Not Active",
+"grpType": "Gaming" 
+},
+{
+ "FemaleP":           0.98,
+"FemaleSE":           0.31,
+"FemaleT":             43,
+"ansT": "DNK",
+"grpType": "Gaming" 
+},
+{
+ "FemaleP":           0.09,
+"FemaleSE":           0.06,
+"FemaleT":              4,
+"ansT": "Ref",
+"grpType": "Gaming" 
+},
+{
+ "FemaleP":           17.1,
+"FemaleSE":           1.09,
+"FemaleT":            752,
+"ansT": "Active",
+"grpType": "AARP,older Adults" 
+},
+{
+ "FemaleP":           82.6,
+"FemaleSE":            1.1,
+"FemaleT":           3634,
+"ansT": "Not Active",
+"grpType": "AARP,older Adults" 
+},
+{
+ "FemaleP":           0.26,
+"FemaleSE":           0.16,
+"FemaleT":             11,
+"ansT": "DNK",
+"grpType": "AARP,older Adults" 
+},
+{
+ "FemaleP":           0.04,
+"FemaleSE":           0.04,
+"FemaleT":              2,
+"ansT": "Ref",
+"grpType": "AARP,older Adults" 
+},
+{
+ "FemaleP":          15.28,
+"FemaleSE":           1.07,
+"FemaleT":            672,
+"ansT": "Active",
+"grpType": "Political" 
+},
+{
+ "FemaleP":          84.48,
+"FemaleSE":           1.08,
+"FemaleT":           3716,
+"ansT": "Not Active",
+"grpType": "Political" 
+},
+{
+ "FemaleP":           0.18,
+"FemaleSE":           0.13,
+"FemaleT":              8,
+"ansT": "DNK",
+"grpType": "Political" 
+},
+{
+ "FemaleP":           0.06,
+"FemaleSE":           0.06,
+"FemaleT":              2,
+"ansT": "Ref",
+"grpType": "Political" 
+},
+{
+ "FemaleP":            5.9,
+"FemaleSE":            0.8,
+"FemaleT":            259,
+"ansT": "Active",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "FemaleP":          93.77,
+"FemaleSE":           0.82,
+"FemaleT":           4125,
+"ansT": "Not Active",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "FemaleP":           0.33,
+"FemaleSE":           0.19,
+"FemaleT":             15,
+"ansT": "DNK",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Ethnic,cultural" 
+},
+{
+ "FemaleP":           6.37,
+"FemaleSE":           0.74,
+"FemaleT":            280,
+"ansT": "Active",
+"grpType": "Labor union" 
+},
+{
+ "FemaleP":          93.47,
+"FemaleSE":           0.75,
+"FemaleT":           4112,
+"ansT": "Not Active",
+"grpType": "Labor union" 
+},
+{
+ "FemaleP":           0.16,
+"FemaleSE":           0.12,
+"FemaleT":              7,
+"ansT": "DNK",
+"grpType": "Labor union" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Labor union" 
+},
+{
+ "FemaleP":          20.79,
+"FemaleSE":           1.32,
+"FemaleT":            915,
+"ansT": "Active",
+"grpType": "Support group" 
+},
+{
+ "FemaleP":          79.12,
+"FemaleSE":           1.32,
+"FemaleT":           3480,
+"ansT": "Not Active",
+"grpType": "Support group" 
+},
+{
+ "FemaleP":            0.1,
+"FemaleSE":            0.1,
+"FemaleT":              4,
+"ansT": "DNK",
+"grpType": "Support group" 
+},
+{
+ "FemaleP":          14.32,
+"FemaleSE":           1.03,
+"FemaleT":            630,
+"ansT": "Active",
+"grpType": "Alumni" 
+},
+{
+ "FemaleP":          85.45,
+"FemaleSE":           1.03,
+"FemaleT":           3759,
+"ansT": "Not Active",
+"grpType": "Alumni" 
+},
+{
+ "FemaleP":           0.17,
+"FemaleSE":           0.12,
+"FemaleT":              8,
+"ansT": "DNK",
+"grpType": "Alumni" 
+},
+{
+ "FemaleP":           0.05,
+"FemaleSE":           0.05,
+"FemaleT":              2,
+"ansT": "Ref",
+"grpType": "Alumni" 
+},
+{
+ "FemaleP":           6.35,
+"FemaleSE":           0.82,
+"FemaleT":            279,
+"ansT": "Active",
+"grpType": "Fan group-performer" 
+},
+{
+ "FemaleP":          93.27,
+"FemaleSE":           0.86,
+"FemaleT":           4103,
+"ansT": "Not Active",
+"grpType": "Fan group-performer" 
+},
+{
+ "FemaleP":           0.38,
+"FemaleSE":           0.26,
+"FemaleT":             17,
+"ansT": "DNK",
+"grpType": "Fan group-performer" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Fan group-performer" 
+},
+{
+ "FemaleP":           2.65,
+"FemaleSE":            0.5,
+"FemaleT":            117,
+"ansT": "Active",
+"grpType": "Fan group-brand" 
+},
+{
+ "FemaleP":          97.11,
+"FemaleSE":           0.51,
+"FemaleT":           4272,
+"ansT": "Not Active",
+"grpType": "Fan group-brand" 
+},
+{
+ "FemaleP":           0.24,
+"FemaleSE":           0.14,
+"FemaleT":             11,
+"ansT": "DNK",
+"grpType": "Fan group-brand" 
+},
+{
+ "FemaleP":              0,
+"FemaleSE":              0,
+"FemaleT":              0,
+"ansT": "Ref",
+"grpType": "Fan group-brand" 
+},
+{
+ "FemaleP":           8.13,
+"FemaleSE":           0.81,
+"FemaleT":            358,
+"ansT": "Active",
+"grpType": "Environmental" 
+},
+{
+ "FemaleP":          91.43,
+"FemaleSE":           0.85,
+"FemaleT":           4022,
+"ansT": "Not Active",
+"grpType": "Environmental" 
+},
+{
+ "FemaleP":           0.44,
+"FemaleSE":           0.27,
+"FemaleT":             19,
+"ansT": "DNK",
+"grpType": "Environmental" 
+},
+{
+ "FemaleP":           3.37,
+"FemaleSE":            0.5,
+"FemaleT":            148,
+"ansT": "Active",
+"grpType": "Other" 
+},
+{
+ "FemaleP":          95.18,
+"FemaleSE":           0.61,
+"FemaleT":           4187,
+"ansT": "Not Active",
+"grpType": "Other" 
+},
+{
+ "FemaleP":           1.32,
+"FemaleSE":           0.35,
+"FemaleT":             58,
+"ansT": "DNK",
+"grpType": "Other" 
+},
+{
+ "FemaleP":           0.13,
+"FemaleSE":            0.1,
+"FemaleT":              6,
+"ansT": "Ref",
+"grpType": "Other" 
+} 
+]
+       if(!(fopts.type==="pieChart" || fopts.type==="sparklinePlus" || fopts.type==="bulletChart")) {
+        var fdata = d3.nest()
+          .key(function(d){
+            //return fopts.group === undefined ? 'main' : d[fopts.group]
+            //instead of main would think a better default is fopts.x
+            return fopts.group === undefined ? fopts.y : d[fopts.group];
+          })
+          .entries(fdata);
+      }
+      
+      if (fopts.disabled != undefined){
+        fdata.map(function(d, i){
+          d.disabled = fopts.disabled[i]
+        })
+      }
+      
+      nv.addGraph(function() {
+        var chart = nv.models[fopts.type]()
+          .width(fopts.width)
+          .height(fopts.height)
+          
+        if (fopts.type != "bulletChart"){
+          chart
+            .x(function(d) { return d[fopts.x] })
+            .y(function(d) { return d[fopts.y] })
+        }
+       
+        chart
+  .margin({
+ "left":    200 
+})
+        
+   chart.tooltip.contentGenerator(function (obj) {
+var content = '<center>' + '<strong>' + obj.data.ansT + '</strong>' +
+    '<p>' + obj.data.grpType + '</p>' + 
+    '<p>' + obj.data.FemaleP +'%'+ '</p>'  +
+    '<p>' + 's.e. ' + obj.data.FemaleSE + '</p></center>';
+return content;
+});   
+
+       d3.select("#" + fopts.id)
+        .append('svg')
+        .datum(fdata)
+        .transition().duration(500)
+        .call(chart);
+
+       nv.utils.windowResize(chart.update);
+       return chart;
+      });
+    };
+    
+</script> 
+</body> 
+    
+</html>
