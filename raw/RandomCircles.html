@@ -1,0 +1,43 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+</head>
+<body>
+    <div id="chart"></div>
+    <script type="text/javascript">
+
+  var w = 960,
+h = 500,
+z = d3.scale.category20c(),
+i = 0;
+
+var svg = d3.select("#chart").append("svg:svg")
+.attr("width", w)
+.attr("height", h)
+.style("pointer-events", "all")
+.style("background-color", "black")
+.on("mousemove", particle);
+function particle() {
+var m = d3.mouse(this);
+
+svg.append("svg:ellipse")
+.attr("cx", m[0])
+.attr("cy", m[1])
+.attr("rx", 1e-6)
+.attr("ry", 1e-6)
+.attr("fill","gray")
+.style("stroke", z(++i))
+.style("stroke-opacity", 1)
+.style("stroke-width",Math.random()*(5-1)+1)
+.transition()
+.duration(2000)
+.ease(Math.sqrt)
+.attr("rx", Math.random()*200)
+.attr("ry",Math.random()*200)
+.style("stroke-opacity", 1e-6)
+.remove();
+}
+    
+    </script>
+</body>
+</html>
