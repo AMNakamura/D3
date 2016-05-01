@@ -1,0 +1,88 @@
+<html>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+ 	 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+ 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+ 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+ 	 	 <style>
+ 	 	 .rChart {
+ 	 	 display: block;
+ 	 	 margin-left: auto; 
+ 	 	 margin-right: auto;
+ 	 	 width: 600px;
+ 	 	 height: 400px;
+ 	 	 } 
+ 	 	 </style>
+ 	 	<head>
+ 	 	 <body>
+<p>This page explores the creation of simple interactive charts created from weighted data from the The Pew Research Center's Internet &amp; American Life Project, "The Social Side of the Internet". Permission to use the survey data was granted by the Pew Research Center's Internet Project December 2013. </p>
+ 	 	 <div id='chart7cc21d66eb2' class='rChart morris'></div> 
+ 	 	 
+ 	 	 <script type='text/javascript'>
+ 	 	 var chartParams = {
+ 	 	 "element": "chart7cc21d66eb2",
+ 	 	"width": 500,
+ 	 	"height": 300,
+ 	 	"xkey": "sex",
+ 	 	"ykeys": [
+ 	 	 "ttl" 
+ 	 	],
+ 	 	"data": [
+ 	 	 {
+ 	 	 "Row.names": [ "sex1" ],
+ 	 	"mean": 0.484330265964,
+ 	 	"SE.x": 0.01195947611273,
+ 	 	"pct": "48.4 %",
+ 	 	"total": 4131.653846088,
+ 	 	"SE.y": 116.2200537027,
+ 	 	"ttl": 4132,
+ 	 	"sex": "Male" 
+ 	 	},
+ 	 	{
+ 	 	 "Row.names": [ "sex2" ],
+ 	 	"mean": 0.515669734036,
+ 	 	"SE.x": 0.01195947611273,
+ 	 	"pct": "51.6 %",
+ 	 	"total": 4398.999999929,
+ 	 	"SE.y": 110.6684072044,
+ 	 	"ttl": 4399,
+ 	 	"sex": "Female" 
+ 	 	} 
+ 	 	],
+ 	 	"names.arg": [ "Male", "Female" ],
+ 	 	"hoverCallback": function(index, options, content){
+ 	 	 var row = options.data[index]
+ 	 	 return '<b>' + row.sex + '</b>' + '<br/>' +
+ 	 	 'Weighted Total: ' + row.ttl + '<br/>' + 
+ 	 	 'Percent: ' + row.pct                 
+ 	 	} ,
+ 	 	"id": "chart7cc21d66eb2",
+ 	 	"labels": "ttl" 
+ 	 	},
+ 	 	 chartType = "Bar"
+ 	 	 new Morris[chartType](chartParams)
+ 	 	</script>
+
+<p>The charts were created with R, using the following packages:
+<ul>
+	<li>weights (with formula, hmisc, anesrake, gdata dependencies)</li>
+	<li>reshape2</li>
+	<li>survey</li>
+	<li>devtools</li>
+</ul></p>
+<p> The chart uses aggregated data prepared to provide weighted totals for plotting. The tooltip modification appears below. The hashtag and pound characters #! are a bit of hackery graciously provided to me by Ramnath Vaidyanathan, the rCharts package author. <p>
+<p><code>
+mp <- mPlot(ttl~sex, data = agg, type = "Bar", names.arg=c("Male","Female")
+)
+mp$set(hoverCallback = "#! function(index, options, content){
+  var row = options.data[index]
+  return '<b>' + row.sex + '</b>' + '<br/>' +
+     'Weighted Total: ' + row.ttl + '<br/>' + 
+     'Percent: ' + row.pct
+} !#")
+mp
+</code></p>
+
+ 	 	</body>
+ 	 	</head>
+</html>
