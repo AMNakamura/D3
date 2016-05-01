@@ -1,0 +1,135 @@
+{
+  "name" : "Bean",
+  "parent" : "null",
+  "filler" : "black",
+  "value"   : 10,
+  "children" : [
+	       {
+		"name" : "Coffees",
+		"parent" : "Coffee bean",
+		"filler" : "#663300",
+                "value" : 14,
+		"children" : [
+				{
+				 "name" : "Basic types",
+				 "parent" : "Coffees",
+				 "filler" : "#664400",
+                                 "value" : 7,
+				 "children" : [
+						{"name" :"Cold brew ", "parent" :"Basic types",  "filler" : "#664400", "value" : 5} , 
+						{"name" :"Drip or filtered ", "parent" :"Basic types",  "filler" : "#664400", "value" : 5} , 
+						{"name" :"French press or catetiere", "parent" :"Basic types" ,  "filler" : "#664400", "value" : 5} , 
+						{"name" :"Instant coffee ", "parent" :"Basic types" ,  "filler" : "#664400", "value" : 5} , 
+						{"name" :"Percolated ", "parent" :"Basic types" ,  "filler" : "#664400", "value" : 5} , 
+						{"name" :"Turkish coffee ", "parent" :"Basic types" ,  "filler" : "#664400", "value" : 5} , 
+						{"name" :"Vacuum coffee ", "parent" :"Basic types" ,  "filler" : "#664400", "value" : 5} 
+						]
+				 },
+
+				{
+				 "name" : "Coffee with milk",
+				 "parent" : "Coffees",
+				 "filler" : "#cc8800",
+                                 "value" : 7,
+				 "children" : [
+						{"name" :"Ca phe sua da ", "parent" :"Coffee with milk", "filler" : "#cc8800", "value" : 5 } , 
+						{"name" :"Cafe au lait ", "parent" :"Coffee with milk", "filler" : "#cc8800" , "value" : 5} , 
+						{"name" :"Egg coffee ", "parent" :"Coffee with milk ", "filler" : "#cc8800" , "value" : 5} , 
+						{"name" :"Eggnog latte ", "parent" :"Coffee with milk", "filler" : "#cc8800" , "value" : 5} , 
+						{"name" :"Eiskaffee ", "parent" :"Coffee with milk", "filler" : "#cc8800" , "value" : 5} , 
+						{"name" :"Kopi susu ", "parent" :"Coffee with milk", "filler" : "#cc8800" , "value" : 5} , 
+						{"name" :"White coffee ", "parent" :"Coffee with milk", "filler" : "#cc8800", "value" : 5 } 
+					      ]
+				}
+
+			    ]
+	     },
+             {
+		"name" : "Combinations",
+		"parent" : "Coffee bean",
+		"filler" : "#4d0066",
+                "value" : 10,
+		"children" : [
+				{
+				 "name" : "Coffee with alcohol",
+				 "parent" : "Combinations",
+				 "filler" : "#660066",
+                                 "value" : 5,
+				 "children" : [
+						{"name" :"Carajillo " ,"parent" :"Coffee with alcohol","filler" : "#660066", "value" : 5} , 
+						{"name" :"Irish coffee " ,"parent" :"Coffee with alcohol","filler" : "#660066", "value" : 5} , 
+						{"name" :"Liqueur coffee " ,"parent" :"Coffee with alcohol","filler" : "#660066", "value" : 5} , 
+						{"name" :"Pharisaer " ,"parent" :"Coffee with alcohol","filler" : "#660066", "value" : 5} , 
+						{"name" :"Rudensheimer Kaffee " ,"parent" :"Coffee with alcohol","filler" : "#660066", "value" : 5}  
+ 
+						]
+				 },
+
+				{
+				 "name" : "Coffee with tea",
+				 "parent" : "Combinations",
+				 "filler" : "#66001a",
+                                 "value" : 4,
+				 "children" : [
+						{"name" :"Black tie " ,"parent" :"Coffee with tea", "filler" : "#66001a", "value" : 5} , 
+						{"name" :"Chai latte " ,"parent" :"Coffee with tea", "filler" : "#66001a", "value" : 5} , 
+						{"name" :"Red tie " ,"parent" :"Coffee with tea", "filler" : "#66001a", "value" : 5} , 
+						{"name" :"Yuanyang " ,"parent" :"Coffee with tea" , "filler" : "#66001a", "value" : 5}  
+
+					      ]
+				}
+
+			    ]
+	     },
+
+             {
+		"name" : "Espressos",
+		"parent" : "Coffee bean",
+		"filler" : "#662200",
+                "value" : 19,
+		"children" : [
+				{
+				 "name" : "Espresso and variations",
+				 "parent" : "Espressos",
+				 "filler" : "#802b00",
+                                 "value" : 8,
+				 "children" : [
+						{"name" :"Cafe Americano " ,"parent" :"Espresso and variations","filler" : "#802b00", "value" : 5} , 
+						{"name" :"Cafe Cubano " ,"parent" :"Espresso and variations","filler" : "#802b00", "value" : 5} , 
+						{"name" :"Cafe Zoro " ,"parent" :"Espresso and variations","filler" : "#802b00", "value" : 5} , 
+						{"name" :"Cafe crema " ,"parent" :"Espresso and variations","filler" : "#802b00", "value" : 5} , 
+						{"name" :"Doppio " ,"parent" :"Espresso and variations","filler" : "#802b00", "value" : 5} , 
+						{"name" :"Espresso Romano " ,"parent" :"Espresso and variations","filler" : "#802b00", "value" : 5} , 
+						{"name" :"Guillermo " ,"parent" :"Espresso and variations","filler" : "#802b00", "value" : 5} , 
+						{"name" :"Ristretto " ,"parent" :"Espresso and variations","filler" : "#802b00", "value" : 5}  
+
+						]
+				 },
+
+				{
+				 "name" : "Espresso with milk",
+				 "parent" : "Espresso and variations",
+				 "filler" : "#b35900",
+                                 "value" : 11,
+				 "children" : [
+						{"name" :"Antoccino " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Breve " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Cafe bombon " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Cappuccino " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Espressino " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Flat white " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Galao " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Latte " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Macchiato " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} , 
+						{"name" :"Viennese melange " ,"parent" :"Espresso with milk ","filler" : "#b35900", "value" : 5} 
+
+					      ]
+				}
+
+			    ]
+	     }
+
+
+	    ]
+}
+
