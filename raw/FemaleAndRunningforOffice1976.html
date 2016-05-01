@@ -1,0 +1,121 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+</head>
+<body>
+<p> Packed bubble charts may be of debatable use in many circumstances, but they’re helpful when you have a lot of data you want to see at once…and they’re fun to make. </p>
+<p> This chart displays historical information summarized in Table 3.2 “Various Agents Important in Decisions to Run for Office among Women Candidates, 1976″ of Susan J. Carroll’s “Women as Candidates in American Politics”. The charting process is the same as that used to create <a href="http://bl.ocks.org/mbostock/4063269%3C" title="Mike Bostock&#39;s Bubble Chart demo">this chart showing the Flare class hierarchy</a> – except that the bubble elements are not unique.   </p>
+<p> The data (shared below the chart) is hierarchical with four internal child nodes (Congress, Statewide, State Senate, and State House), each with a number of leaf nodes that reflect the type of recruiting agent (e.g., Family). The size of each circle represents the percent of affirmative answers among female candidates surveyed. Colors are assigned to offices using the first four members of D3′s 20-member ordinal scale. Congress is <span style="color: #1f77b4">blue</span>; Statewide Office is in <span style="color: #aec7e8">light blue</span>; State Senate is in <span style="color: #ff7f0e">orange</span>; and State House is in <span style="color: #ffbb78">peach</span>. </p>
+<p>Agent identifer names have been abbreviated (e.g., Political Party is shortened to Party) to limit truncation.</p>
+ 
+ <div id="chart"></div>
+    <script type="text/javascript">
+var json = {
+ "name": "mybubble",
+ "children": [
+  {
+   "name": "grandma",
+   "children": [
+    {
+     "name": "Congress",
+     "children": [
+      {"name": "Party", "size": 17.6},
+      {"name": "Interest", "size": 2.9},
+      {"name": "Family", "size": 44.1},
+      {"name": "Office Holder", "size": 20.6},
+      {"name": "Friends", "size": 58.9},
+      {"name": "Assoc.", "size": 2.9},
+      {"name": "Voters", "size": 5.9}
+     ]
+    },
+    {
+     "name": "Statewide",
+     "children": [
+      {"name": "Party", "size": 16.7},
+      {"name": "Interest", "size": 8.3},
+      {"name": "Family", "size": 50.0},
+      {"name": "Friends", "size": 58.3},
+      {"name": "Office Holder", "size": 16.7}
+     ]
+    },
+ {
+     "name": "StateSenate",
+     "children": [
+      {"name": "Party", "size": 39.2},
+      {"name": "Interest", "size": 12.7},
+      {"name": "Family", "size": 33.3},
+      {"name": "LWV", "size":2.0},
+      {"name": "Office Holder", "size": 33.3},
+      {"name": "Friends", "size": 41.2},
+      {"name": "Assoc.", "size": 5.9},
+      {"name": "Voters", "size": 4.9}
+     ]
+    },
+{
+     "name": "StateHouse",
+     "children": [
+      {"name": "Party", "size": 34.6},
+      {"name": "Interest", "size": 10.4},
+      {"name": "Family", "size": 46.6},
+      {"name": "LWV", "size":1.5},
+      {"name": "Office Holder", "size": 30.0},
+      {"name": "Friends", "size": 32.9},
+      {"name": "Assoc.", "size": 3.8},
+      {"name": "Voters", "size": 5.8}
+     ]
+    }
+   ]
+  }
+ ]
+};
+console.log("okay");
+// canvas size
+var r = 800,
+    format = d3.format(",d"),
+    fill = d3.scale.category20();
+// adding the bleed variable
+var bleed = 100;
+var bubble = d3.layout.pack()
+    .sort(null)
+    .size([r, r])
+    .padding(1.5);
+var vis = d3.select(".chart").append("svg")
+    .attr("width", r)
+    .attr("height", r)
+    .attr("class", "bubble");
+vis.append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "black");
+  var node = vis.selectAll("g.node")
+      .data(bubble.nodes(classes(json))
+      .filter(function(d) { return !d.children; }))
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  node.append("title")
+      .text(function(d) { return d.className + ": " + format(d.value); });
+  node.append("circle")
+      .attr("r", function(d) { return d.r; })
+      .style("fill", function(d) { return fill(d.packageName); });
+  node.append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", ".3em") //center text vertically
+      .text(function(d) { return d.className.substring(0, d.r / 3); })
+      .style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8) / this.getComputedTextLength() * 14) + "px"; });
+// Returns a flattened hierarchy containing all leaf nodes under the root.
+function classes(root) {
+  var classes = [];
+  function recurse(name, node) {
+    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
+    else classes.push({packageName: name, className: node.name, value: node.size});
+  }
+  recurse(null, root);
+  return {children: classes};
+}
+</script><svg width="800" height="800" class="bubble"><rect width="100%" height="100%" fill="black"></rect><g class="node" transform="translate(356.82911475169107,431.72934740599993)"><title>Party: </title><circle r="46.93203740037929" style="fill: rgb(31, 119, 180);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 33.5407px;">Party</text></g><g class="node" transform="translate(424.2975187370439,431.72934740599993)"><title>Interest: </title><circle r="19.050749791670004" style="fill: rgb(31, 119, 180);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 10.5906px;">Intere</text></g><g class="node" transform="translate(435.5113770065838,337.56802621086337)"><title>Family: </title><circle r="74.29034392690181" style="fill: rgb(31, 119, 180);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 43.8845px;">Family</text></g><g class="node" transform="translate(309.1641824053587,344.73991388913305)"><title>Office Holder: </title><circle r="50.77462029967601" style="fill: rgb(31, 119, 180);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 14.8964px;">Office Holder</text></g><g class="node" transform="translate(224.37643187027007,453.7680577902718)"><title>Friends: </title><circle r="85.85601395420123" style="fill: rgb(31, 119, 180);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 46.1495px;">Friends</text></g><g class="node" transform="translate(324.13552553411125,490.7472663832302)"><title>Assoc.: </title><circle r="19.050749791670004" style="fill: rgb(31, 119, 180);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 10.0186px;">Assoc.</text></g><g class="node" transform="translate(369.24081056079865,506.2941575662956)"><title>Voters: </title><circle r="27.173093302943727" style="fill: rgb(31, 119, 180);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 15.2627px;">Voters</text></g><g class="node" transform="translate(442.80540159265854,495.34441944442136)"><title>Party: </title><circle r="45.716324818853266" style="fill: rgb(174, 199, 232);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 32.5909px;">Party</text></g><g class="node" transform="translate(489.5184141779868,431.1008882154662)"><title>Interest: </title><circle r="32.229392567515475" style="fill: rgb(174, 199, 232);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 15.2286px;">Interest</text></g><g class="node" transform="translate(586.2676687690172,373.0690394668099)"><title>Family: 50</title><circle r="79.10393290113862" style="fill: rgb(174, 199, 232);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 46.8898px;">Family</text></g><g class="node" transform="translate(538.9570494607153,213.94619953703994)"><title>Friends: </title><circle r="85.41759740064609" style="fill: rgb(174, 199, 232);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 45.9024px;">Friends</text></g><g class="node" transform="translate(406.4581120090247,219.60072888450358)"><title>Office Holder: </title><circle r="45.716324818853266" style="fill: rgb(174, 199, 232);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 13.2855px;">Office Holder</text></g><g class="node" transform="translate(289.29947561455,224.06210015923483)"><title>Party: </title><circle r="70.04160795652416" style="fill: rgb(255, 127, 14);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 51.5951px;">Party</text></g><g class="node" transform="translate(222.58009103685643,313.26538049039607)"><title>Interest: </title><circle r="39.86712654441842" style="fill: rgb(255, 127, 14);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 19.3488px;">Interest</text></g><g class="node" transform="translate(120.82586098364999,342.63703024965713)"><title>Family: </title><circle r="64.55578862878946" style="fill: rgb(255, 127, 14);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 37.8069px;">Family</text></g><g class="node" transform="translate(125.49261682969092,424.3660940476615)"><title>LWV: 2</title><circle r="15.820786580227725" style="fill: rgb(255, 127, 14);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 11.5761px;">LWV</text></g><g class="node" transform="translate(76.9295287764499,490.26787671063636)"><title>Office Holder: </title><circle r="64.55578862878946" style="fill: rgb(255, 127, 14);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 19.2853px;">Office Holder</text></g><g class="node" transform="translate(160.79946981664077,599.66524121146)"><title>Friends: </title><circle r="71.80615665214607" style="fill: rgb(255, 127, 14);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 38.2284px;">Friends</text></g><g class="node" transform="translate(254.78553313941634,564.1714480659023)"><title>Assoc.: </title><circle r="27.173093302943727" style="fill: rgb(255, 127, 14);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 15.4252px;">Assoc.</text></g><g class="node" transform="translate(300.319059985493,536.2317826059389)"><title>Voters: </title><circle r="24.763447975633937" style="fill: rgb(255, 127, 14);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 13.6756px;">Voters</text></g><g class="node" transform="translate(366.025462690733,600.7019519555932)"><title>Party: </title><circle r="65.80382270579777" style="fill: rgb(255, 187, 120);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 48.2843px;">Party</text></g><g class="node" transform="translate(466.2133640849398,575.2658815322312)"><title>Interest: </title><circle r="36.07694412902777" style="fill: rgb(255, 187, 120);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 17.3042px;">Interest</text></g><g class="node" transform="translate(570.4252058674374,529.2240635738426)"><title>Family: </title><circle r="76.3670531760834" style="fill: rgb(255, 187, 120);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 45.1811px;">Family</text></g><g class="node" transform="translate(627.6777898746892,457.78000646623747)"><title>LWV: </title><circle r="13.701203086329143" style="fill: rgb(255, 187, 120);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 9.50035px;">LWV</text></g><g class="node" transform="translate(703.9418097653311,452.30263062488586)"><title>Office Holder: 30</title><circle r="61.27364294912377" style="fill: rgb(255, 187, 120);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 18.24px;">Office Holder</text></g><g class="node" transform="translate(723.4593650554,326.8860697501339)"><title>Friends: </title><circle r="64.16689479693964" style="fill: rgb(255, 187, 120);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 33.9215px;">Friends</text></g><g class="node" transform="translate(644.6552477609398,288.94986190815973)"><title>Assoc.: </title><circle r="21.807449351827366" style="fill: rgb(255, 187, 120);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 11.8536px;">Assoc.</text></g><g class="node" transform="translate(650.0108095813284,239.00126212219496)"><title>Voters: </title><circle r="26.94182872875614" style="fill: rgb(255, 187, 120);"></circle><text text-anchor="middle" dy=".3em" style="font-size: 15.1104px;">Voters</text></g></svg></div>
+    
+    </script>
+</body>
+</html>
+
