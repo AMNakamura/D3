@@ -3,7 +3,7 @@
 Used to maintain and preview the content for D3 html files in Markdown files.
 Pages site: 
 
-[TestLink]([url](https://github.com/AMNakamura/D3/blob/master/raw/BreakingBadCoOccurrence.html)) and !
+[TestLink](https://github.com/AMNakamura/D3/blob/master/raw/BreakingBadCoOccurrence.html)
 
 
 ### Jekyll Themes
